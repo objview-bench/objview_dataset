@@ -50,12 +50,54 @@
   "name": "ObjView Benchmark (ObjView-Bench)",
   "description": "ObjView-Bench distributes benchmark metadata for 3D assets aligned with Objaverse 1.0: normalization parameters (translation center and scale from Poisson-disk samples on GLB meshes) and fixed labels for omnidirectional self-occlusion, observation saturation difficulty, and planning difficulty. Rasterized meshes and textures are not included; scripts document how to fetch GLBs and reproduce normalized geometry.",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
-  "citeAs": "TODO: Add BibTeX for the ObjView / ObjView-Bench paper after publication.",
+  "citeAs": "@article{pan2026objviewbench, title = {ObjView-Bench: Rethinking Difficulty and Deployment for Object-Centric View Planning}, author = {Pan, Sicong and Hu, Hao and Huang, Xuying and Wingender, Benno and Bennewitz, Maren}, journal = {arXiv preprint arXiv:2605.10707}, year = {2026}}",
   "datePublished": "2026-05-05T04:02:48.975972Z",
   "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "Sicong Pan",
+      "affiliation": {
+        "@type": "sc:Organization",
+        "name": "University of Bonn"
+      }
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Hao Hu",
+      "affiliation": {
+        "@type": "sc:Organization",
+        "name": "Independent Researcher"
+      }
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Xuying Huang",
+      "affiliation": {
+        "@type": "sc:Organization",
+        "name": "University of Bonn"
+      }
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Benno Wingender",
+      "affiliation": {
+        "@type": "sc:Organization",
+        "name": "University of Bonn"
+      }
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Maren Bennewitz",
+      "affiliation": {
+        "@type": "sc:Organization",
+        "name": "University of Bonn"
+      }
+    }
+  ],
   "rai:dataBiases": "Objaverse reflects community upload patterns (categories, quality, geographic and cultural skew) and licensing heterogeneity; downstream models may inherit these biases.",
   "rai:dataCollection": "Object identities and source meshes originate from Objaverse 1.0 (community-uploaded 3D models with associated licenses). This release adds derived normalization statistics and benchmark labels from the ObjView benchmark pipeline.",
-  "rai:dataLimitations": "Benchmark label fields are released as fixed values for the listed UIDs; the code that produced them is not part of this bundle. Full meshes must be obtained under Objaverse and per-asset licenses. Labels reflect dataset construction choices and may not transfer to other domains.",
+  "rai:dataLimitations": "Benchmark label fields are released as fixed values for the listed UIDs. This dataset bundle contains labels, normalization metadata, and geometry-preprocessing scripts; the benchmark code that produced the labels is at https://github.com/objview-bench/objview_bench. Full meshes must be obtained under Objaverse and per-asset licenses. Labels reflect dataset construction choices and may not transfer to other domains.",
   "rai:dataPreprocessingProtocol": [
     "Meshes: load GLB, Poisson-disk sample surface points, set translation_center to the sample mean and scale to the max L2 distance from that center.",
     "Optional geometry pipeline: download GLB via objaverse; convert with Blender 4.2.x to OBJ with a single baked texture; normalize OBJ vertices with the same center and scale."
@@ -63,7 +105,11 @@
   "rai:dataSocialImpact": "Intended for academic and non-deceptive research. Misuse could include surveillance-oriented 3D reconstruction or synthetic data generation without respecting source licenses; users should comply with Objaverse and asset-level terms.",
   "rai:dataUseCases": "Empirical research on multi-view 3D understanding, active view selection, and navigation policies evaluated on fixed object-centric assets.",
   "rai:personalSensitiveInformation": "No personal identifiers. UIDs identify 3D assets, not individuals.",
-  "url": "TODO: Replace with the public dataset or project page URL.",
+  "url": "https://github.com/objview-bench/objview_dataset",
+  "sameAs": [
+    "https://arxiv.org/abs/2605.10707",
+    "https://github.com/objview-bench/objview_bench"
+  ],
   "version": "1.0.0",
   "distribution": [
     {
@@ -73,7 +119,7 @@
       "description": "Dataset documentation and geometry preprocessing instructions.",
       "contentUrl": "README.md",
       "encodingFormat": "text/markdown",
-      "sha256": "4fe44611864ef4937c666ec02325e2adfda845600b66f45f399ac12490e6313d"
+      "sha256": "e7990a00d6017f76a7ce634ff715306d40d427c4ec79eda81a7689d39ab73fd9"
     },
     {
       "@type": "cr:FileObject",
@@ -109,7 +155,7 @@
       "description": "Download Objaverse GLBs by UID; optional mesh validation.",
       "contentUrl": "scripts/download_objaverse_glb.py",
       "encodingFormat": "text/x-python",
-      "sha256": "6545f22e2a4a4303e0f04985cabecb175b81a07ae1c5fc736224b63e004218e5"
+      "sha256": "951fc1d299e5c3610c58d050e5e6b29b24b4bded3fe2fff8ba7b7efab577786c"
     },
     {
       "@type": "cr:FileObject",
@@ -127,7 +173,7 @@
       "description": "Blender batch GLB to standardized textured OBJ (run with blender -b -P).",
       "contentUrl": "scripts/glb_to_obj_blender.py",
       "encodingFormat": "text/x-python",
-      "sha256": "9d6358fb6af0c4d49466427c23322e271f1f6787d6997233f43008a71c1707f1"
+      "sha256": "2f97905cdc443bc8819dd487cc527d60b452ba9da3f1975c4eefb65e0ab9662b"
     },
     {
       "@type": "cr:FileObject",
@@ -136,7 +182,7 @@
       "description": "Apply normalization transform to OBJ vertex lines.",
       "contentUrl": "scripts/normalize_obj.py",
       "encodingFormat": "text/x-python",
-      "sha256": "764f9f76cc82e9fd704099486f5a4364e4e689c7f22b1bd01e274edb0fadda4a"
+      "sha256": "942226a6947e1d3234e3e0cf2c578af2fea216a899ea50183616caeaa18972c2"
     }
   ],
   "recordSet": [
